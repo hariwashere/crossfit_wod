@@ -1,4 +1,4 @@
-application: wodsup
+application: wods-up
 version: 1
 api_version: 1
 runtime: python
