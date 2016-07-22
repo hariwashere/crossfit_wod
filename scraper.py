@@ -1,13 +1,14 @@
-from lxml import html
-import requests
 import re
+import requests
+import simplejson
+
+from lxml import html
 import M2E
 
 
 BASE_URL = 'https://www.crossfit.com/workout'
 
 def test():
-    import ipdb; ipdb.set_trace()
     wods = master()
 
     for i in range(3):
@@ -35,14 +36,11 @@ def main():
     wod_to_equipment = []
 
     for wod in exercise_text:
-        equipment = get_equipments_for_wod(wod)
+        equipment = list(set(get_equipments_for_wod(wod)))
         wod_to_equipment.append({'wod': wod, 'equipment': equipment})
 
     with open('exercises', 'w') as op_file:
-        op_file.writelines(
-            [repr(line) for line in wod_to_equipment]
-        )
-    return
+        op_file.write(simplejson.dumps(wod_to_equipment))
 
 
 def get_equipments_for_wod(exercise_text):
@@ -65,5 +63,24 @@ def is_wod_significant(wod):
     return not(len(wod) < 10 or wod.startswith('Rest Day'))
 
 
+def load_wod_from_file():
+    with open('exercises', 'r') as wod_file:
+        return simplejson.loads(wod_file.read())
+
+
+def get_wod_for_equipments(equipments):
+    wod_dict = load_wod_from_file()
+    equipments_had = set(equipments)
+    selected_wods = []
+    for wod in wod_dict:
+        equipments_needed = set(wod['equipment'])
+        if equipments_needed <= equipments_had:
+            selected_wods.append(wod['wod'])
+        if len(selected_wods) == 3:
+            return selected_wods
+    return selected_wods
+
+
 if __name__ == "__main__":
-    main()
+    # main()
+    print get_wod_for_equipments(['barbell', 'wall ball'])
