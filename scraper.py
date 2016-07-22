@@ -22,7 +22,7 @@ def test():
                 db_wod.ghd = True
 
 
-def master():
+def main():
     page = requests.get(BASE_URL)
     tree = html.fromstring(page.content)
     exercise_doms = tree.find_class('col-sm-6')
@@ -30,15 +30,12 @@ def master():
     # Weed out matches for the entire exercise section
     exercise_doms = filter(lambda exercise: len(exercise.classes) == 1, exercise_doms)
     exercise_text = map(get_exercise_text, exercise_doms)
+    exercise_text = filter(is_wod_significant, exercise_text)
 
     wod_to_equipment = []
 
     for wod in exercise_text:
-        if len(wod) < 10 or wod.startswith('Rest Day'):
-            continue
-        else:
-            equipment = get_equipments_for_wod(wod)
-
+        equipment = get_equipments_for_wod(wod)
         wod_to_equipment.append({'wod': wod, 'equipment': equipment})
 
     with open('exercises', 'w') as op_file:
@@ -46,20 +43,6 @@ def master():
             [repr(line) for line in wod_to_equipment]
         )
     return
-
-
-def convert_wod_to_equipment(wod):
-    movements = get_movements_with_equipment(wod)
-    movements = [m.lower() for m in movements]
-
-    equipment = []
-
-    for key, value in M2E.MOVEMENT_TO_EQUIPMENT.iteritems():
-        if key.lower() in movements:
-            if value != "none":
-                equipment.append(value)
-
-    return list(set(equipment))
 
 
 def get_equipments_for_wod(exercise_text):
@@ -73,10 +56,14 @@ def get_equipments_for_wod(exercise_text):
     return equipments_needed
 
 
-
 def get_exercise_text(exercise_dom):
     exercise_string = unicode(exercise_dom.text_content()).encode('utf-8')
     return exercise_string[:exercise_string.find("Post")]
 
+
+def is_wod_significant(wod):
+    return not(len(wod) < 10 or wod.startswith('Rest Day'))
+
+
 if __name__ == "__main__":
-    master()
+    main()
