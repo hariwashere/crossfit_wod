@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  	<title>WOD's up!</title>
+  	<title class="wods-title">WOD's up!</title>
   	<meta charset="utf-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
   	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -38,6 +38,19 @@
 		});
 	</script>
   	<style>
+  		body{
+  			background: url(
+  				http://static1.squarespace.com/static/526734b3e4b0bc5cd29fe5dc/t/53d453f3e4b0984ca9afda87/1406424054488/weight.jpg?format=2500w
+  				);
+  			background-repeat: no-repeat;
+  		}
+  		.wods-title{
+  			margin-left: 250px;
+  			margin-top: 250px;
+  			font-size: 500%;
+  			font-family: "Times New Roman";
+  			color: white;
+  		}
   		.vertical-divider{
 			clear: both;
 			position: relative;
@@ -62,45 +75,68 @@
 		}
 
 		/* Very simple grid for example */
-		.container { position: relative; width: 960px; margin: 20px auto; padding: 0; }
+		.container { position: relative; width: 960px; margin: 20px auto; padding: 0;font-size: 120%; color: #428bca;}
+
+		.checkbox{font-size: 100%; color: black;}
 
 		.container .column, .container .columns { float: left; display: inline; margin-left: 10px; margin-right: 10px; }
 
 		.container .one-third.column { width: 300px; }
 
-		.container .two-thirds.column { width: 620px; }
+		.container .two-thirds.column { 
+			position: absolute;
+    		left: 380px;
+    		top: 250px;
+    		width: 620px;
+    	}
+
+		.container_form {position: absolute;
+    		left: 80px;
+    		top: 200px;
+    	}
+    	.container_button {position: absolute;
+    		left: 80px;
+    		top: 630px;
+    	}
+    	.input_form{
+    		color: black;
+    	}
   	</style>
 </head>
 
 <body>
 
 <div class="container">
-	<h2>WOD's up!</h2>
+	<h2 class="wods-title">WOD's up!</h2>
 </div>
 <div class="container vertical-divider">
   <div class="column one-third">
     <div>
-		<div class="container">
-			  <input name="selector[]" id="checkbox1" class="equipment_checkbox" type="checkbox" value="GHD machine">GHD machine"/>GHD machine <br/>
-			  <input name="selector[]" id="checkbox2" class="equipment_checkbox" type="checkbox" value="Pull up bar" />Pull up bar <br/>
-			  <input name="selector[]" id="checkbox3" class="equipment_checkbox" type="checkbox" value="Kettlebell" />Kettlebell <br/>
-			  <input name="selector[]" id="checkbox4" class="equipment_checkbox" type="checkbox" value="Bike" />Bike <br/>
-			  <input name="selector[]" id="checkbox5" class="equipment_checkbox" type="checkbox" value="Box" />Box <br/>
-			  <input name="selector[]" id="checkbox5" class="equipment_checkbox" type="checkbox" value="Jump Rope" />Jump Rope <br/>
-			  <input name="selector[]" id="checkbox5" class="equipment_checkbox" type="checkbox" value="Wall" />Wall <br/>
-			  <input name="selector[]" id="checkbox5" class="equipment_checkbox" type="checkbox" value="Running Space" />Running Space <br/>
-			  <input name="selector[]" id="checkbox5" class="equipment_checkbox" type="checkbox" value="Climbing Rope" />Climbing Rope <br/>
-			  <input name="selector[]" id="checkbox5" class="equipment_checkbox" type="checkbox" value="Rings" />Rings <br/>
-			  <input name="selector[]" id="checkbox5" class="equipment_checkbox" type="checkbox" value="Rowing Machine" />Rowing Machine <br/>
-			  <input name="selector[]" id="checkbox5" class="equipment_checkbox" type="checkbox" value="Pool" />Pool <br/>
+		<div class="container_form">
+				<h1>Equipment</h1>
+				<div class="input_form">
+				  	<input name="selector[]" id="checkbox1" class="equipment_checkbox" type="checkbox" value="GHD machine" /> GHD machine <br/>
+				  	<input name="selector[]" id="checkbox2" class="equipment_checkbox" type="checkbox" value="pull up bar" /> Pull up bar <br/>
+				  	<input name="selector[]" id="checkbox3" class="equipment_checkbox" type="checkbox" value="kettlebell" /> Kettlebell <br/>
+				  	<input name="selector[]" id="checkbox3" class="equipment_checkbox" type="checkbox" value="barbell" /> Barbell <br/>
+				  	<input name="selector[]" id="checkbox4" class="equipment_checkbox" type="checkbox" value="bike" /> Bike <br/>
+				  	<input name="selector[]" id="checkbox5" class="equipment_checkbox" type="checkbox" value="box" /> Box <br/>
+				  	<input name="selector[]" id="checkbox5" class="equipment_checkbox" type="checkbox" value="jump rope" /> Jump Rope <br/>
+				  	<input name="selector[]" id="checkbox5" class="equipment_checkbox" type="checkbox" value="wall" /> Wall <br/>
+				  	<input name="selector[]" id="checkbox5" class="equipment_checkbox" type="checkbox" value="running space" /> Running Space <br/>
+				  	<input name="selector[]" id="checkbox5" class="equipment_checkbox" type="checkbox" value="climbing rope" /> Climbing Rope <br/>
+				  	<input name="selector[]" id="checkbox5" class="equipment_checkbox" type="checkbox" value="medicine ball" /> Medicine Ball <br/>
+				  	<input name="selector[]" id="checkbox5" class="equipment_checkbox" type="checkbox" value="rings" /> Rings <br/>
+				  	<input name="selector[]" id="checkbox5" class="equipment_checkbox" type="checkbox" value="rowing machine" /> Rowing Machine <br/>
+				  	<input name="selector[]" id="checkbox5" class="equipment_checkbox" type="checkbox" value="pool" /> Pool <br/>
+			  	</div>
 		</div>
-		<div class="container">
+		<div class="container_button">
 		  <button type="button" class="btn btn-primary">Get WOD</button>
 		</div>
 	</div>
   </div>
   <div class="column two-thirds" id="WODs">
-    <p>WOD goes here</p>
   </div>
 </div>
 

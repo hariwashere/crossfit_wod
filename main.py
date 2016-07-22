@@ -3,8 +3,8 @@
 import os
 import webapp2
 import json
+
 import wsgiref.handlers
-from google.appengine.ext import db
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 
@@ -13,7 +13,7 @@ class MyWorkoutSession(webapp2.RequestHandler):
 	def get(self):
 		self.response.out.write(unicode(template.render('wod.html', {})))
 
-class WorkoutSession(webapp2.RequestHandler):
+class GetWorkoutSession(webapp2.RequestHandler):
     def get(self):
         dict = {
             'wods': [
@@ -62,8 +62,12 @@ class WorkoutSession(webapp2.RequestHandler):
         output = json.dumps(dict)
         self.response.write(output)
 
+
 def main():
-    app = webapp2.WSGIApplication([('/', MyWorkoutSession),('/get_workout_session', WorkoutSession),], debug=True)
+    app = webapp2.WSGIApplication(
+                                  [('/', MyWorkoutSession),
+                                   ('/get_workout_session', GetWorkoutSession),
+                                   ], debug=True)
     wsgiref.handlers.CGIHandler().run(app)
 
 if __name__ == "__main__":
