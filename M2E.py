@@ -132,67 +132,20 @@ MOVEMENT_TO_EQUIPMENT = {
     'weighted lunge': 'barbell'
 }
 
-CANON_EQUIP_TO_DB_EQUIP = [
-    {
-        canon: 'GHD machine',
-        db: 'ghd'
-    },
-    {
-        canon: 'pull up bar',
-        db: 'pull_up_bar'
-    },
-    {
-        canon: 'kettlebell',
-        db: 'kettlebell'
-    },
-    {
-        canon: 'barbell',
-        db: 'barbell'
-    },
-    {
-        canon: 'GHD machine',
-        db: 'ghd'
-    },{
-        canon: 'GHD machine',
-        db: 'ghd'
-    },{
-        canon: 'GHD machine',
-        db: 'ghd'
-    },{
-        canon: 'GHD machine',
-        db: 'ghd'
-    },
-    {
-        canon: 'GHD machine',
-        db: 'ghd'
-    },
-    {
-        canon: 'GHD machine',
-        db: 'ghd'
-    },
-    {
-        canon: 'GHD machine',
-        db: 'ghd'
-    },{
-        canon: 'GHD machine',
-        db: 'ghd'
-    },
-    {
-        canon: 'GHD machine',
-        db: 'ghd'
-    },
-    {
-        canon: 'GHD machine',
-        db: 'ghd'
-    },
-    {
-        canon: 'GHD machine',
-        db: 'ghd'
-    },
-
-
-
-
-
-
-]
+# canon to db name
+CANON_EQUIP_TO_DB_EQUIP = {
+    'GHD machine': 'ghd',
+    'pull up bar': 'pull_up_bar',
+    'kettlebell': 'kettlebell',
+    'barbell': 'barbell',
+    'bike': 'bike',
+    'box': 'box',
+    'jump rope': 'jump_rope',
+    'wall': 'wall',
+    'running space': 'running_space',
+    'climbing rope': 'climbing_rope',
+    'medicine ball': 'medicine_ball',
+    'rings': 'rings',
+    'rowing machine': 'rowing_machine',
+    'pool': 'pool'
+}
