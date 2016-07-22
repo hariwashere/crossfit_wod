@@ -10,23 +10,26 @@
   	<script>
 		$(document).ready(function(){
 		    $(".btn-primary").click(function(){
-		        $.ajax({
-                    type: 'GET',
-                    url: "/get_workout_session",
+		    	console.log("getting equipment")
+		    	var values = $('input[type=checkbox]:checked').map(function(_,el) {
+		    		return $(el).val();
+				}).get();
+				console.log(values)
+				$.ajax({
+					type: 'GET',
+					url: "/get_workout_session",
                     dataType: "json",
+                    data: {equipments:values},
 					success: function(data) {
 						$( "#WODs" ).empty();
 						for (wod_count = 0; wod_count < data.wods.length; wod_count++) {
 							wod_object = data.wods[wod_count]
 							wod_array = wod_object.wod
-							console.log(wod_array)
 							list_id = "list" + wod_count
 							$('#WODs').append("<ul id="+list_id+"></ul>")
-							console.log(wod_array.length)
 							for (item_count = 0; item_count < wod_array.length; item_count++) {
 								$("#"+list_id).append("<li>"+ wod_array[item_count] + "</li>");
 							}
-							console.log("printing line")
 							$('#WODs').append("<hr/>")
 						}
                     }
@@ -78,21 +81,18 @@
   <div class="column one-third">
     <div>
 		<div class="container">
-			<div class="checkbox">
-			  <label><input type="checkbox" value="">Barbell</label>
-			</div>
-			<div class="checkbox">
-			  <label><input type="checkbox" value="">Burpee Bar</label>
-			</div>
-			<div class="checkbox">
-			  <label><input type="checkbox" value="">Dumbell</label>
-			</div>
-			<div class="checkbox">
-			  <label><input type="checkbox" value="">Pull-up bar</label>
-			</div>
-			<div class="checkbox">
-			  <label><input type="checkbox" value="">Rope</label>
-			</div>
+			  <input name="selector[]" id="checkbox1" class="equipment_checkbox" type="checkbox" value="GHD machine">GHD machine"/>GHD machine <br/>
+			  <input name="selector[]" id="checkbox2" class="equipment_checkbox" type="checkbox" value="Pull up bar" />Pull up bar <br/>
+			  <input name="selector[]" id="checkbox3" class="equipment_checkbox" type="checkbox" value="Kettlebell" />Kettlebell <br/>
+			  <input name="selector[]" id="checkbox4" class="equipment_checkbox" type="checkbox" value="Bike" />Bike <br/>
+			  <input name="selector[]" id="checkbox5" class="equipment_checkbox" type="checkbox" value="Box" />Box <br/>
+			  <input name="selector[]" id="checkbox5" class="equipment_checkbox" type="checkbox" value="Jump Rope" />Jump Rope <br/>
+			  <input name="selector[]" id="checkbox5" class="equipment_checkbox" type="checkbox" value="Wall" />Wall <br/>
+			  <input name="selector[]" id="checkbox5" class="equipment_checkbox" type="checkbox" value="Running Space" />Running Space <br/>
+			  <input name="selector[]" id="checkbox5" class="equipment_checkbox" type="checkbox" value="Climbing Rope" />Climbing Rope <br/>
+			  <input name="selector[]" id="checkbox5" class="equipment_checkbox" type="checkbox" value="Rings" />Rings <br/>
+			  <input name="selector[]" id="checkbox5" class="equipment_checkbox" type="checkbox" value="Rowing Machine" />Rowing Machine <br/>
+			  <input name="selector[]" id="checkbox5" class="equipment_checkbox" type="checkbox" value="Pool" />Pool <br/>
 		</div>
 		<div class="container">
 		  <button type="button" class="btn btn-primary">Get WOD</button>
