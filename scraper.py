@@ -24,15 +24,13 @@ def test():
 
 
 def main():
-    page = requests.get(BASE_URL)
-    tree = html.fromstring(page.content)
-    exercise_doms = tree.find_class('col-sm-6')
-
-    # Weed out matches for the entire exercise section
-    exercise_doms = filter(lambda exercise: len(exercise.classes) == 1, exercise_doms)
-    exercise_text = map(get_exercise_text, exercise_doms)
-    exercise_text = filter(is_wod_significant, exercise_text)
-
+    exercise_text = []
+    for page_number in range(1, 11):
+        print "Getting page " + str(page_number)
+        url = BASE_URL + 'page={page}'.format(page=page_number)
+        exercise_text.extend(
+            get_wods_for_url(url)
+        )
     wod_to_equipment = []
 
     for wod in exercise_text:
@@ -42,6 +40,16 @@ def main():
     with open('exercises', 'w') as op_file:
         op_file.write(simplejson.dumps(wod_to_equipment))
 
+
+def get_wods_for_url(url):
+    page = requests.get(BASE_URL)
+    tree = html.fromstring(page.content)
+    exercise_doms = tree.find_class('col-sm-6')
+
+    # Weed out matches for the entire exercise section
+    exercise_doms = filter(lambda exercise: len(exercise.classes) == 1, exercise_doms)
+    exercise_text = map(get_exercise_text, exercise_doms)
+    return filter(is_wod_significant, exercise_text)
 
 def get_equipments_for_wod(exercise_text):
     equipments_needed = []
@@ -83,4 +91,4 @@ def get_wod_for_equipments(equipments):
 
 if __name__ == "__main__":
     # main()
-    print get_wod_for_equipments(['barbell', 'wall ball'])
+    print get_wod_for_equipments(['barbell', 'wall ball', 'jump rope', 'box', 'pull up bar', 'running space'])
