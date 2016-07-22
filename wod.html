@@ -7,6 +7,24 @@
   	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  	<script>
+		$(document).ready(function(){
+		    $(".btn-primary").click(function(){
+		        $.ajax({
+                    type: 'GET',
+                    url: "/get_workout_session",
+                    dataType: "json",
+                    success: function(data) {
+                    	$( "#WODs" ).empty();
+                        $('#WODs').append("<ul id='newList'></ul>");
+						for (cnt = 0; cnt < data.wod.length; cnt++) {
+						  $("#newList").append("<li>"+ data.wod[cnt] + "</li>");
+						}
+                    }
+                })
+		    });
+		});
+	</script>
   	<style>
   		.vertical-divider{
 			clear: both;
@@ -40,21 +58,11 @@
 
 		.container .two-thirds.column { width: 620px; }
   	</style>
-  	<script>
-		$(document).ready(function(){
-		    $(".btn-primary").click(function(){
-		        $.get("", function(data, status){
-		        	$("#WODs").append(data)
-		        });
-		    });
-		});
-	</script>
 </head>
 
 <body>
 
 <div class="container">
-	<h2>WOD's up!</h2>
 </div>
 <div class="container vertical-divider">
   <div class="column one-third">

@@ -1,28 +1,38 @@
 #!/usr/bin/env python
 
 import os
+import webapp2
+import json
 import wsgiref.handlers
 from google.appengine.ext import db
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 
 
-class WorkoutSession(db.Model):
-    workoutType = db.StringProperty(required=True)
-    workoutTime = db.DateTimeProperty(required=True)
-
-
-class MyWorkoutSession(webapp.RequestHandler):
+class MyWorkoutSession(webapp2.RequestHandler):
 	def get(self):
-#       list_of_equipment = self.request.get('list_of_equipment')
 		self.response.out.write(unicode(template.render('wod.html', {})))
-#		self.response.out.write('hello wodsup')
 
+class WorkoutSession(webapp2.RequestHandler):
+    def get(self):
+        dict = {'wod': ['8 deadlifts',
+                '40 GHD sit-ups',
+                '80 double-unders',
+                '4 rope climbs',
+                '80 wall-ball shots',
+                '4 rope climbs',
+                '80 double-unders',
+                '40 GHD sit-ups',
+                '8 deadlifts',]
+        }
+        output = json.dumps(dict)
+        self.response.write(output)
 
 def main():
-	app = webapp.WSGIApplication([
-		(r'.*', MyWorkoutSession)], debug=True)
-	wsgiref.handlers.CGIHandler().run(app)
+    app = webapp2.WSGIApplication([('/', MyWorkoutSession),('/get_workout_session', WorkoutSession),], debug=True)
+    wsgiref.handlers.CGIHandler().run(app)
 
 if __name__ == "__main__":
 	main()
+
+
