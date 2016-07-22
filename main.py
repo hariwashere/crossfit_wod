@@ -15,15 +15,49 @@ class MyWorkoutSession(webapp2.RequestHandler):
 
 class WorkoutSession(webapp2.RequestHandler):
     def get(self):
-        dict = {'wod': ['8 deadlifts',
-                '40 GHD sit-ups',
-                '80 double-unders',
-                '4 rope climbs',
-                '80 wall-ball shots',
-                '4 rope climbs',
-                '80 double-unders',
-                '40 GHD sit-ups',
-                '8 deadlifts',]
+        dict = {
+            'wods': [
+                {
+                    'wod': [
+                        '8 deadlifts',
+                        '40 GHD sit-ups',
+                        '80 double-unders',
+                        '4 rope climbs',
+                        '80 wall-ball shots',
+                        '80 double-unders',
+                    ],
+                },
+                {
+                    'wod': [
+                        '8 deadlifts',
+                        '40 GHD sit-ups',
+                        '80 double-unders',
+                        '4 rope climbs',
+                        '80 wall-ball shots',
+                        '80 double-unders',
+                    ],
+                },
+                {
+                    'wod': [
+                        '8 deadlifts',
+                        '40 GHD sit-ups',
+                        '80 double-unders',
+                        '4 rope climbs',
+                        '80 wall-ball shots',
+                        '80 double-unders',
+                    ],
+                },
+                {
+                    'wod': [
+                        '8 deadlifts',
+                        '40 GHD sit-ups',
+                        '80 double-unders',
+                        '4 rope climbs',
+                        '80 wall-ball shots',
+                        '80 double-unders',
+                    ],
+                },
+            ]
         }
         output = json.dumps(dict)
         self.response.write(output)

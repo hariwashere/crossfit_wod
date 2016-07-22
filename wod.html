@@ -14,14 +14,23 @@
                     type: 'GET',
                     url: "/get_workout_session",
                     dataType: "json",
-                    success: function(data) {
-                    	$( "#WODs" ).empty();
-                        $('#WODs').append("<ul id='newList'></ul>");
-						for (cnt = 0; cnt < data.wod.length; cnt++) {
-						  $("#newList").append("<li>"+ data.wod[cnt] + "</li>");
+					success: function(data) {
+						$( "#WODs" ).empty();
+						for (wod_count = 0; wod_count < data.wods.length; wod_count++) {
+							wod_object = data.wods[wod_count]
+							wod_array = wod_object.wod
+							console.log(wod_array)
+							list_id = "list" + wod_count
+							$('#WODs').append("<ul id="+list_id+"></ul>")
+							console.log(wod_array.length)
+							for (item_count = 0; item_count < wod_array.length; item_count++) {
+								$("#"+list_id).append("<li>"+ wod_array[item_count] + "</li>");
+							}
+							console.log("printing line")
+							$('#WODs').append("<hr/>")
 						}
                     }
-                })
+                });
 		    });
 		});
 	</script>
@@ -63,6 +72,7 @@
 <body>
 
 <div class="container">
+	<h2>WOD's up!</h2>
 </div>
 <div class="container vertical-divider">
   <div class="column one-third">
