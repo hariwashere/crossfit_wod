@@ -3,7 +3,7 @@ import requests
 import re
 
 MOVEMENT_TO_REGEX = {
-    'dead lift': 'dead[ -]?lifts?'
+    'deadlift': 'dead[ -]?lifts?'
 }
 
 
