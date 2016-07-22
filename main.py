@@ -8,6 +8,8 @@ import wsgiref.handlers
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 
+import scraper
+
 
 class MyWorkoutSession(webapp2.RequestHandler):
 	def get(self):
@@ -15,6 +17,20 @@ class MyWorkoutSession(webapp2.RequestHandler):
 
 class GetWorkoutSession(webapp2.RequestHandler):
     def get(self):
+
+        equipments = self.request.get("equipments")
+
+        wods = scraper.get_wod_for_equipments(equipments)
+
+        dict = {}
+        dict['wods'] = []
+
+        for wod in wods:
+            inner_wod_dict = {}
+            inner_wod_dict['wod'] = [wod]
+            dict['wods'].append(inner_wod_dict)
+
+        """
         dict = {
             'wods': [
                 {
@@ -59,6 +75,7 @@ class GetWorkoutSession(webapp2.RequestHandler):
                 },
             ]
         }
+        """
         output = json.dumps(dict)
         self.response.write(output)
 
