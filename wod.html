@@ -10,16 +10,15 @@
   	<script>
 		$(document).ready(function(){
 		    $(".btn-primary").click(function(){
-		    	console.log("getting equipment")
 		    	var values = $('input[type=checkbox]:checked').map(function(_,el) {
 		    		return $(el).val();
 				}).get();
-				console.log(values)
+				values_string = values.join();
+
 				$.ajax({
 					type: 'GET',
-					url: "/get_workout_session",
-                    dataType: "json",
-                    data: {equipments:values},
+					url: "/get_workout_session?equipments=" + values_string,
+					dataType: "json",
 					success: function(data) {
 						$( "#WODs" ).empty();
 						for (wod_count = 0; wod_count < data.wods.length; wod_count++) {
@@ -41,7 +40,7 @@
   		body{
   			background: url(
   				http://static1.squarespace.com/static/526734b3e4b0bc5cd29fe5dc/t/53d453f3e4b0984ca9afda87/1406424054488/weight.jpg?format=2500w
-  				);
+			);
   			background-repeat: no-repeat;
   		}
   		.wods-title{

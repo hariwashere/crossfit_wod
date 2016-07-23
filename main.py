@@ -17,18 +17,16 @@ class MyWorkoutSession(webapp2.RequestHandler):
 
 class GetWorkoutSession(webapp2.RequestHandler):
     def get(self):
-
-        equipments = self.request.get("equipments")
-
+        equipments = self.request.get("equipments").split(',')
         wods = scraper.get_wod_for_equipments(equipments)
 
-        dict = {}
-        dict['wods'] = []
+        wod_dict = {}
+        wod_dict['wods'] = []
 
         for wod in wods:
             inner_wod_dict = {}
             inner_wod_dict['wod'] = [wod]
-            dict['wods'].append(inner_wod_dict)
+            wod_dict['wods'].append(inner_wod_dict)
 
         """
         dict = {
@@ -76,7 +74,7 @@ class GetWorkoutSession(webapp2.RequestHandler):
             ]
         }
         """
-        output = json.dumps(dict)
+        output = json.dumps(wod_dict)
         self.response.write(output)
 
 
